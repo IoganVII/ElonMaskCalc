@@ -39,7 +39,7 @@ namespace EM.Calc.Core
                 var interfaces = item.GetInterfaces();
 
                 // если класс реализаует заданный интерфейс
-                if (interfaces.Contains(needType))
+                if (item.GetInterface("IOperation") != null)
                 {
                     //добавляем в операции экземпляр данного класса
                     var instance = Activator.CreateInstance(item);
