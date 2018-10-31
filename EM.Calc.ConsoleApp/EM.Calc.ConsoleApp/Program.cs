@@ -3,59 +3,77 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Reflection;
+using EM.Calc.Core;
 
 namespace EM.Calc.ConsoleApp
 {
     class Program
     {
-
-        public void inputMas(int[] args)
-        {
-
-        }
-
-
+        // "1+1"
+        // sum 12 32 34
         static void Main(string[] args)
         {
-            var calc = new EM.Calc.Core.Calc();
-            while (true)
+            double[] values;
+            string operation;
+
+            var calc = new Core.Calc();
+
+            // найти файл с операцией
+            // загрузить этот файл
+
+            // найти в нем операцию
+            var type = typeof(SumOperation);
+            var memebers = type.GetMembers();
+
+            // добавить операцию в калькулятор
+
+
+            string[] operations = calc.Operations
+                .Select(o => o.Name)
+                .ToArray();
+
+            if (args.Length == 0)
             {
-                string key = Console.ReadLine();
-                string command = null;
-                string numbers = null;
-                int result = 0;
-                key = key.Replace(" ", string.Empty);
+                Console.WriteLine("Список операций:");
 
-                for (int i = 0; i < key.Length; i++)
-                    if ((key[i] < 48) || (key[i] > 57))
-                        command = command + key[i];
-                    else
-                        numbers = numbers + key[i];
-
-                int[] masNumber = new int[numbers.Length];
-
-                for (int i = 0; i < numbers.Length; i++)
-                    masNumber[i] = Convert.ToInt32(numbers[i].ToString());
-
-                switch (command)
+                foreach (var item in operations)
                 {
-        /*            case "sum":
-                        result = calc.Sum(masNumber);
-                        break;
-                    case "sub":
-                        result = calc.Sub(masNumber);
-                        break;*/
-                    case "pow":
-                        result = calc.Pow(masNumber);
-                        break;
-                    default:
-                        Console.WriteLine("Ошибка ввода");
-                        continue;
+                    Console.WriteLine(item);
                 }
+                Console.WriteLine("Введите операцию: ");
 
-                Console.WriteLine("Ответ: " + result);
-                Console.ReadKey();
+
+                operation = Console.ReadLine();
+
+                Console.WriteLine("Введите аргументы через пробел: ");
+                var operands = Console.ReadLine();
+                values = ConvertToDouble(
+                    operands.Split(new[] { " ", ";" }, StringSplitOptions.RemoveEmptyEntries)
+                );
             }
+            else
+            {
+                operation = args[0].ToLower();
+                values = ConvertToDouble(args, 1);
+            }
+
+            var result = calc.Execute(operation, values);
+
+            Console.WriteLine(result);
+
+            Console.ReadKey();
         }
+
+        private static double[] ConvertToDouble(string[] args, int start = 0)
+        {
+            return args
+                .Skip(start)
+                .Select(Convert.ToDouble)
+                .ToArray();
+        }
+
+
     }
 }
+
