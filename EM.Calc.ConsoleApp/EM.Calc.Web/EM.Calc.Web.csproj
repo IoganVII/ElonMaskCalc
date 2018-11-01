@@ -192,6 +192,7 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\Calc.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -204,6 +205,23 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\EM.Calc.Class\EM.Calc.Core.csproj">
+      <Project>{839c9df4-f99a-4f71-9b57-6714432262e2}</Project>
+      <Name>EM.Calc.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EM.Calc.ConsoleApp\EM.Calc.ConsoleApp.csproj">
+      <Project>{4bf760ad-61b9-4324-b9c4-a7022388060a}</Project>
+      <Name>EM.Calc.ConsoleApp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EM.Calc.WinCalc\EM.Calc.WinCalc.csproj">
+      <Project>{750c8319-0f67-4741-959d-4c1199729aec}</Project>
+      <Name>EM.Calc.WinCalc</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

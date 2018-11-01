@@ -84,6 +84,10 @@
       <Project>{839c9df4-f99a-4f71-9b57-6714432262e2}</Project>
       <Name>EM.Calc.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\EM.Calc.ConsoleApp\EM.Calc.ConsoleApp.csproj">
+      <Project>{4bf760ad-61b9-4324-b9c4-a7022388060a}</Project>
+      <Name>EM.Calc.ConsoleApp</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

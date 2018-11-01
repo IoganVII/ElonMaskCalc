@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-
 namespace EM.Calc.Core
+
 {
     public class Calc
     {
@@ -15,15 +15,27 @@ namespace EM.Calc.Core
 
         public Calc()
         {
+
+            // Мне очень стыдно :(
             Operations = new List<IOperation>();
+            var operSum = new SumOperation();
+            Operations.Add(operSum);
+            var operSub = new SubOperation();
+            Operations.Add(operSub);
+            var operPow = new PowOperation();
+            Operations.Add(operPow);
 
-            var path = Environment.CurrentDirectory;
+            //Я не понимаю эту рефлексию
+            /*  var path = Environment.CurrentDirectory;
 
-            var dllFiles = Directory.GetFiles(path, "*.dll", SearchOption.AllDirectories);
-            foreach (var file in dllFiles)
-            {
-                LoadOperations(Assembly.LoadFrom(file));
-            }
+              var dllFiles = Directory.GetFiles(path, "*.dll", SearchOption.AllDirectories);
+              foreach (var file in dllFiles)
+              {
+                  if (file == @"C:\Program Files (x86)\IIS Express\EM.Calc.Core.dll" || file == "")
+                  {
+                      LoadOperations(Assembly.LoadFrom(file));
+                  }
+              }*/
         }
 
         private void LoadOperations(Assembly assembly)
