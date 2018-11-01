@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using EM.Calc.Core;
 
 namespace EM.Calc.WinCalc
 {
@@ -71,7 +72,7 @@ namespace EM.Calc.WinCalc
         {
             char number = e.KeyChar;
             // Блокировка если цифра
-            if (!Char.IsDigit(number) && number != 8 && number != 32)
+            if (!Char.IsDigit(number) && number != 8 && number != 32 && number != 45)
             {
                 e.Handled = true;
             }
@@ -90,14 +91,22 @@ namespace EM.Calc.WinCalc
             }
         }
 
-        private void tbinput_TextChanged(object sender, EventArgs e)
+        private void cboperation_SelectedIndexChanged(object sender, EventArgs e)
         {
+            var operation = Calc.Operations
+                .OfType<IExtOperation>()
+                .FirstOrDefault(o => o.Name == cboperation.Text);
 
-        }
+            if (operation != null)
+            {
+                toolTip1.SetToolTip(cboperation, operation.Description);
+            }
+            else
+            {
+                toolTip1.SetToolTip(cboperation, "Это старая операция");
+            }
 
-        private void label2_Click(object sender, EventArgs e)
-        {
-
+    
         }
     }
 }

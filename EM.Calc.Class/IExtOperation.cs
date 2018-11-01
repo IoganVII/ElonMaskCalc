@@ -9,7 +9,7 @@ namespace EM.Calc.Core
     /// <summary>
     /// Расширенная операция
     /// </summary>
-  /*  interface IExtOperation : IOperation
+    public interface IExtOperation : IOperation
     {
         /// <summary>
         /// Название
@@ -25,5 +25,5 @@ namespace EM.Calc.Core
         /// Количество аргументов
         /// </summary>
         int? ArgCount { get; }
-    }*/
+    }
 }

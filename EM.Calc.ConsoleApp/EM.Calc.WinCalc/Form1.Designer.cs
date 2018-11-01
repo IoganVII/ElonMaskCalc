@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.cboperation = new System.Windows.Forms.ComboBox();
             this.lblresult = new System.Windows.Forms.Label();
             this.btnExec = new System.Windows.Forms.Button();
@@ -38,6 +39,7 @@
             this.bt5 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
             // 
             // cboperation
@@ -49,6 +51,7 @@
             this.cboperation.Name = "cboperation";
             this.cboperation.Size = new System.Drawing.Size(121, 28);
             this.cboperation.TabIndex = 0;
+            this.cboperation.SelectedIndexChanged += new System.EventHandler(this.cboperation_SelectedIndexChanged);
             // 
             // lblresult
             // 
@@ -80,7 +83,7 @@
             this.tbinput.Name = "tbinput";
             this.tbinput.Size = new System.Drawing.Size(322, 23);
             this.tbinput.TabIndex = 3;
-            this.tbinput.TextChanged += new System.EventHandler(this.tbinput_TextChanged);
+      //      this.tbinput.TextChanged += new System.EventHandler(this.tbinput_TextChanged);
             this.tbinput.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbinput_KeyPress);
             // 
             // bt2
@@ -143,7 +146,7 @@
             this.label2.Size = new System.Drawing.Size(371, 25);
             this.label2.TabIndex = 1;
             this.label2.Text = "Введите операнды через пробел";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
+          //  this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // Form1
             // 
@@ -183,6 +186,7 @@
         private System.Windows.Forms.Button bt5;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }
 
