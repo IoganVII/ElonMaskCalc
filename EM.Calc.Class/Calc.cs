@@ -13,29 +13,31 @@ namespace EM.Calc.Core
         /// </summary>
         public IList<IOperation> Operations { get; set; }
 
+        public static string AssemblyDirectory
+        {
+            get
+            {
+                string codeBase = Assembly.GetExecutingAssembly().CodeBase;
+                UriBuilder uri = new UriBuilder(codeBase);
+                string path = Uri.UnescapeDataString(uri.Path);
+                return Path.GetDirectoryName(path);
+            }
+        }
+
         public Calc()
         {
 
-            // Мне очень стыдно :(
             Operations = new List<IOperation>();
-            var operSum = new SumOperation();
-            Operations.Add(operSum);
-            var operSub = new SubOperation();
-            Operations.Add(operSub);
-            var operPow = new PowOperation();
-            Operations.Add(operPow);
 
-            //Я не понимаю эту рефлексию
-            /*  var path = Environment.CurrentDirectory;
+            var path = AssemblyDirectory;
 
-              var dllFiles = Directory.GetFiles(path, "*.dll", SearchOption.AllDirectories);
-              foreach (var file in dllFiles)
-              {
-                  if (file == @"C:\Program Files (x86)\IIS Express\EM.Calc.Core.dll" || file == "")
-                  {
-                      LoadOperations(Assembly.LoadFrom(file));
-                  }
-              }*/
+            //Получаю пути до dll файлов проекта
+            var dllFiles = Directory.GetFiles(path, "*.dll", SearchOption.AllDirectories);
+
+            foreach (var dll in dllFiles)
+            {
+                LoadOperations(Assembly.LoadFrom(dll));
+            }
         }
 
         private void LoadOperations(Assembly assembly)
