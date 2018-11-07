@@ -24,12 +24,26 @@ namespace EM.Calc.Core
             }
         }
 
-        public Calc()
+        public Calc() : this("")
         {
-
+            
+        }
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="Path">Путь до сторонних библиотек</param>
+        public Calc(string path)
+        {
             Operations = new List<IOperation>();
 
-            var path = AssemblyDirectory;
+            if (string.IsNullOrWhiteSpace(path))
+            {
+                path = Environment.CurrentDirectory;
+            }
+            else
+            {
+                LoadOperations(Assembly.GetExecutingAssembly());
+            }
 
             //Получаю пути до dll файлов проекта
             var dllFiles = Directory.GetFiles(path, "*.dll", SearchOption.AllDirectories);

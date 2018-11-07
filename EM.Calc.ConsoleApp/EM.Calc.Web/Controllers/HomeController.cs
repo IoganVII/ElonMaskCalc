@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using EM.Calc.Core;
+using EM.Calc.Web.Models;
 
 namespace EM.Calc.Web.Controllers
 {
@@ -28,34 +29,23 @@ namespace EM.Calc.Web.Controllers
             return View();
         }
 
-        public ActionResult Calc(string ope, string mas)
+        public ActionResult Execute(string ope, string mas)
         {
             var realmas = mas
                 .Split(' ')
                 .Select(Convert.ToDouble)
                 .ToArray();
-            var calc = new Core.Calc();
+            var calc = new Core.Calc(@"D:\Temp");
 
-            ViewBag.operartor = ope;
+            var result = calc.Execute(ope, realmas);
 
-            switch (ope)
+            var model = new OperationResult()
             {
-                case "sum":
-                    ViewBag.Message = calc.Execute(ope, realmas);
-                    break;
-                case "pow":
-                    ViewBag.Message = calc.Execute(ope, realmas);
-                    break;
-                case "sub":
-                    ViewBag.Message = calc.Execute(ope, realmas);
-                    break;
-                default:
-                    break;
+                Name = ope,
+                Result = result
+            };
 
-            }
-
-
-            return View();
+            return View(model);
         }
     }
 }
